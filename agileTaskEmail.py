@@ -1,15 +1,19 @@
 from PyGmail import PyGmail
 
 import sys
-sys.path.append( '/Users/tyghe/Programming/pyAgileTaskApi' )
-from AgileTaskAPI import AgileTaskAPI
- 
+
 # Gmail username which is your full email address(AKA whatever is in the top right of your gmail screen)
 user = ''
 # Gmail password
 password = ''
 # The label that will contain new task emails
 gmail_label = ''
+
+# Path to pyAgileTaskAPI(https://github.com/necrolyte2/pyAgileTaskAPI)
+path_to_agiletaskapi = ''
+
+sys.path.append( path_to_agiletaskapi )
+from AgileTaskAPI import AgileTaskAPI
 
 # Initialize the Gmail Imap Interface
 g = PyGmail( )
