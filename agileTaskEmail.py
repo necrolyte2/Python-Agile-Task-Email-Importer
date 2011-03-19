@@ -11,6 +11,8 @@ gmail_label = ''
 
 # Path to pyAgileTaskAPI(https://github.com/necrolyte2/pyAgileTaskAPI)
 path_to_agiletaskapi = ''
+# Your Agile Task API Key
+api_key = ''
 
 sys.path.append( path_to_agiletaskapi )
 from AgileTaskAPI import AgileTaskAPI
@@ -22,7 +24,7 @@ g = PyGmail( )
 g.login( user, password )
 
 # Initialize the Python Agile Task API
-patapi = AgileTaskAPI( '' )
+patapi = AgileTaskAPI( api_key )
 
 # Get mail from a specific folder/label
 msgs = g.get_mail( gmail_label )
