@@ -1,24 +1,39 @@
 from PyImap import PyImap
 
+import ConfigParser
+config = ConfigParser.RawConfigParser()
+config.read( 'settings.cfg' )
+sections = config.sections()
+print sections
+
 import sys
 
 # imap username which is your full email address
-user = ''
+user = config.get( sections[1], 'imap_user' )
 # imap password
-password = ''
+password = config.get( sections[1], 'imap_password' )
 # The label/folder that will contain new task emails
-imap_folder = ''
+imap_folder = config.get( sections[1], 'imap_folder' )
+# Imap Server
+host = config.get( sections[1], 'imap_host' )
+# Imap Port
+port = config.getint( sections[1], 'imap_port' )
+# Timeout
+timeout = config.getfloat( sections[1], 'imap_timeout' )
 
 # Path to pyAgileTaskAPI(https://github.com/necrolyte2/pyAgileTaskAPI)
-path_to_agiletaskapi = ''
+path_to_agiletaskapi = config.get( sections[0], 'path_to_agiletaskapi' )
+
 # Your Agile Task API Key
-api_key = ''
+api_key = config.get( sections[0], 'api_key' )
+
+print "User: %s\nPass: %s\nFolder: %s\nPath: %s\nKey: %s\n" % (user, password, imap_folder, path_to_agiletaskapi, api_key)
 
 sys.path.append( path_to_agiletaskapi )
 from AgileTaskAPI import AgileTaskAPI
 
 # Initialize the Imap Interface
-g = PyImap( )
+g = PyImap( host, port, timeout )
 
 # Login to Imap
 g.login( user, password )

@@ -1,0 +1,11 @@
+[AgileTaskEmail]
+imap_host =
+imap_port =
+imap_timeout = 10.0
+imap_user =
+imap_password =
+imap_folder = 
+
+[pyAgileTaskApi]
+path_to_agiletaskapi = 
+api_key =

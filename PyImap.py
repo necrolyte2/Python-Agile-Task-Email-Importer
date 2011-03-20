@@ -36,7 +36,7 @@ class PyImap:
         for num in ids:
             typ, data = self.M.fetch( num, '(RFC822)' )
             msg = email.message_from_string( data[0][1] )
-            msgs[num] = self.get_msg_body( msg )
+            msgs[num] = msg
     return msgs
 
 
