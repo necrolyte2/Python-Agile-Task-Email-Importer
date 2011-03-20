@@ -1,13 +1,15 @@
 import imaplib
 import re
 import email
+import socket
 
-class PyGmail:
-  def __init__(self):
-    self.IMAP_SERVER='imap.gmail.com'
-    self.IMAP_PORT=993
+class PyImap:
+  def __init__(self, server, port, timeout = 10.0):
+    self.IMAP_SERVER = server
+    self.IMAP_PORT = port
     self.M = None
     self.response = None
+    socket.setdefaulttimeout( timeout )
  
   def login(self, username, password):
     self.M = imaplib.IMAP4_SSL(self.IMAP_SERVER, self.IMAP_PORT)

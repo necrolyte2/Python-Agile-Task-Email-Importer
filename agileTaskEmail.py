@@ -1,13 +1,13 @@
-from PyGmail import PyGmail
+from PyImap import PyImap
 
 import sys
 
-# Gmail username which is your full email address(AKA whatever is in the top right of your gmail screen)
+# imap username which is your full email address
 user = ''
-# Gmail password
+# imap password
 password = ''
-# The label that will contain new task emails
-gmail_label = ''
+# The label/folder that will contain new task emails
+imap_folder = ''
 
 # Path to pyAgileTaskAPI(https://github.com/necrolyte2/pyAgileTaskAPI)
 path_to_agiletaskapi = ''
@@ -17,17 +17,17 @@ api_key = ''
 sys.path.append( path_to_agiletaskapi )
 from AgileTaskAPI import AgileTaskAPI
 
-# Initialize the Gmail Imap Interface
-g = PyGmail( )
+# Initialize the Imap Interface
+g = PyImap( )
 
-# Login to gmail
+# Login to Imap
 g.login( user, password )
 
 # Initialize the Python Agile Task API
 patapi = AgileTaskAPI( api_key )
 
 # Get mail from a specific folder/label
-msgs = g.get_mail( gmail_label )
+msgs = g.get_mail( imap_folder )
 
 # For each message extract the id of the mail and the body
 for msg_id, msg_body in msgs.items():
