@@ -1,10 +1,22 @@
 [AgileTaskEmail]
+# The Imap host to fetch mail from
 imap_host =
-imap_port =
+# The port to use to fetch mail from
+imap_port = 993
+# How long to wait before timing out
 imap_timeout = 10.0
+# The user name for the imap account
 imap_user =
+# The password for the user
 imap_password =
+# Which folder to check on the imap server(In Gmail they are called labels)
 imap_folder = 
+# List of comma separated emails that will be checked against to make sure only
+#  tasks from them are added.
+valid_from_emails =
+# List of comma separated Subjects that will be checked against to make sure only
+#  tasks that have those subjects are added
+valid_subjects =
 
 [pyAgileTaskApi]
 path_to_agiletaskapi = 

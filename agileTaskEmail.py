@@ -21,6 +21,14 @@ port = config.getint( sections[1], 'imap_port' )
 # Timeout
 timeout = config.getfloat( sections[1], 'imap_timeout' )
 
+# Email addresses that are ok to pull new tasks from
+valid_emails = config.get( sections[1], 'valid_from_emails' ).split( ',' )
+valid_emails = [email.strip() for email in valid_emails]
+
+# Subjects that are ok to pull tasks from
+valid_subjects = config.get( sections[1], 'valid_subjects' ).split( ',' )
+valid_subjects = [subject.strip() for subject in valid_subjects]
+
 # Path to pyAgileTaskAPI(https://github.com/necrolyte2/pyAgileTaskAPI)
 path_to_agiletaskapi = config.get( sections[0], 'path_to_agiletaskapi' )
 
@@ -44,13 +52,28 @@ patapi = AgileTaskAPI( api_key )
 # Get mail from a specific folder/label
 msgs = g.get_mail( imap_folder )
 
+# Which messages to delete
+deletes = []
+
 # For each message extract the id of the mail and the body
-for msg_id, msg_body in msgs.items():
-	# Add the task to the today list
-	try:
-		newTask = patapi.AddTask( msg_body, icebox = 'false' )
-		g.delete_msgs( list( msg_id ) )
-	except:
-		print "Failed to add %s" % msg_body
+for msg_id, msg in msgs.items():
+	from_address = msg.get( 'from' )
+	subject = msg.get( 'subject' )
+	if from_address in valid_emails and subject in valid_subjects:
+		msg_body = g.get_msg_body( msg )
+		# Add the task to the today list
+		try:
+			newTask = patapi.AddTask( msg_body, icebox = 'false' )
+			print "Added task %s\n" % msg_body
+			deletes.append( msg_id )
+		except Exception as e:
+			print "Failed to add %s\n" % msg_body
+			print e
+	else:
+		print "From: %s Subject: %s not in" % (from_address, subject)
+		print "%s or %s" % (valid_emails, valid_subjects)
+
+# Delete all queued messages to be deleted
+g.delete_msgs( deletes )
 
 g.logout()
