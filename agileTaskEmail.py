@@ -35,7 +35,7 @@ path_to_agiletaskapi = config.get( sections[0], 'path_to_agiletaskapi' )
 # Your Agile Task API Key
 api_key = config.get( sections[0], 'api_key' )
 
-print "User: %s\nPass: %s\nFolder: %s\nPath: %s\nKey: %s\n" % (user, password, imap_folder, path_to_agiletaskapi, api_key)
+#print "User: %s\nPass: %s\nFolder: %s\nPath: %s\nKey: %s\n" % (user, password, imap_folder, path_to_agiletaskapi, api_key)
 
 sys.path.append( path_to_agiletaskapi )
 from AgileTaskAPI import AgileTaskAPI
