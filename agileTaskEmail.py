@@ -1,10 +1,9 @@
 from PyImap import PyImap
 
+import sys
 import ConfigParser
 config = ConfigParser.RawConfigParser()
-config.read( 'settings.cfg' )
-
-import sys
+config.read( "%s/%s", (sys.path[0],'settings.cfg') )
 
 # imap username which is your full email address
 user = config.get( 'AgileTaskEmail', 'imap_user' )
