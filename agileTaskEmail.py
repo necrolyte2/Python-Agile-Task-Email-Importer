@@ -3,37 +3,35 @@ from PyImap import PyImap
 import ConfigParser
 config = ConfigParser.RawConfigParser()
 config.read( 'settings.cfg' )
-sections = config.sections()
-print sections
 
 import sys
 
 # imap username which is your full email address
-user = config.get( sections[1], 'imap_user' )
+user = config.get( 'AgileTaskEmail', 'imap_user' )
 # imap password
-password = config.get( sections[1], 'imap_password' )
+password = config.get( 'AgileTaskEmail', 'imap_password' )
 # The label/folder that will contain new task emails
-imap_folder = config.get( sections[1], 'imap_folder' )
+imap_folder = config.get( 'AgileTaskEmail', 'imap_folder' )
 # Imap Server
-host = config.get( sections[1], 'imap_host' )
+host = config.get( 'AgileTaskEmail', 'imap_host' )
 # Imap Port
-port = config.getint( sections[1], 'imap_port' )
+port = config.getint( 'AgileTaskEmail', 'imap_port' )
 # Timeout
-timeout = config.getfloat( sections[1], 'imap_timeout' )
+timeout = config.getfloat( 'AgileTaskEmail', 'imap_timeout' )
 
 # Email addresses that are ok to pull new tasks from
-valid_emails = config.get( sections[1], 'valid_from_emails' ).split( ',' )
+valid_emails = config.get( 'AgileTaskEmail', 'valid_from_emails' ).split( ',' )
 valid_emails = [email.strip() for email in valid_emails]
 
 # Subjects that are ok to pull tasks from
-valid_subjects = config.get( sections[1], 'valid_subjects' ).split( ',' )
+valid_subjects = config.get( 'AgileTaskEmail', 'valid_subjects' ).split( ',' )
 valid_subjects = [subject.strip() for subject in valid_subjects]
 
 # Path to pyAgileTaskAPI(https://github.com/necrolyte2/pyAgileTaskAPI)
-path_to_agiletaskapi = config.get( sections[0], 'path_to_agiletaskapi' )
+path_to_agiletaskapi = config.get( 'pyAgileTaskApi', 'path_to_agiletaskapi' )
 
 # Your Agile Task API Key
-api_key = config.get( sections[0], 'api_key' )
+api_key = config.get( 'pyAgileTaskApi', 'api_key' )
 
 #print "User: %s\nPass: %s\nFolder: %s\nPath: %s\nKey: %s\n" % (user, password, imap_folder, path_to_agiletaskapi, api_key)
 
