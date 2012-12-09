@@ -19,5 +19,4 @@ valid_from_emails =
 valid_subjects =
 
 [pyAgileTaskApi]
-path_to_agiletaskapi = 
 api_key =

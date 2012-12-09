@@ -2,6 +2,7 @@ import imaplib
 import re
 import email
 import socket
+import ssl
 
 class PyImap:
   def __init__(self, server, port, timeout = 10.0):
@@ -12,9 +13,20 @@ class PyImap:
     socket.setdefaulttimeout( timeout )
  
   def login(self, username, password):
-    self.M = imaplib.IMAP4_SSL(self.IMAP_SERVER, self.IMAP_PORT)
-    rc, self.response = self.M.login(username, password)
-    return rc
+    error = None
+    tries = 3
+    while tries > 0:
+        try:
+            self.M = imaplib.IMAP4_SSL(self.IMAP_SERVER, self.IMAP_PORT)
+            rc, self.response = self.M.login(username, password)
+            break
+        except ssl.SSLError, e:
+            tries -= 1
+            error = e
+    if tries > 0:
+        return rc
+    else:
+        raise e
 
   def list_mail( self, folder='Inbox' ):
     status, count = self.M.select( folder )
