@@ -24,6 +24,7 @@ setup(
     packages = [],
     scripts = scripts(),
     data_files = [
+        "PyImap.py",
     ],
     install_requires = [
         "pyAgileTaskAPI >=1.1.0",

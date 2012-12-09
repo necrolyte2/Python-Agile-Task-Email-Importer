@@ -2,3 +2,4 @@ build
 testinstall
 dist
 pyAgileTaskEmailImport.egg-info
+settings.cfg
